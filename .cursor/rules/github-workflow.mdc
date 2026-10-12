@@ -1,0 +1,31 @@
+---
+description: Hikaku.uz Git & GitHub Deployment Workflow Rule
+globs: **/*
+alwaysApply: true
+---
+
+# 🐙 Hikaku.uz GitHub Workflow & Deployment Rule
+
+> **FOYDALANUVCHI QOIDASI (PRIMARY RULE)**:
+> Serverga (`157.173.110.5`) to'g'ridan-to'g'ri SSH/SCP orqali fayllarni yuklash taqiqlanadi!
+> Barcha o'zgarishlar faqat **GitHub** orqali amalga oshirilishi shart.
+
+### 📌 Repozitoriy:
+- **GitHub URL:** `https://github.com/ibrohimkoha/hikakuz` (Private)
+- **Local Path:** `/home/iskurama/Projects/hikakuz`
+- **Remote Server Path:** `/root/anivorm`
+
+### 🔄 Ishlash Oqimi (Standard Workflow):
+1. **Lokalda o'zgartirish**: Barcha kodlar avvalo `/home/iskurama/Projects/hikakuz` papkasida yoziladi va tahrirlanadi.
+2. **Git Commit & Push**:
+   ```bash
+   git add .
+   git commit -m "feat/fix: tavsif"
+   git push origin main
+   ```
+3. **Serverda Qabul Qilish (Pull & Reload)**:
+   ```bash
+   cd /root/anivorm && git pull origin main
+   # Agar frontend o'zgarsa: cd frontend && npm run build && pm2 reload anivorm-web
+   # Agar backend o'zgarsa: cd backend && go build -o bin/server cmd/server/main.go && pm2 restart anivorm-api
+   ```

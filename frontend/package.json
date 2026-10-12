@@ -1,0 +1,45 @@
+{
+  "name": "anivorm-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.4.7",
+    "lucide-react": "^0.475.0",
+    "next": "^15.1.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.35.4",
+    "swiper": "^14.2.0",
+    "tailwind-merge": "^3.0.1",
+    "video.js": "^8.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@types/video.js": "^7.3.58",
+    "autoprefixer": "^10.5.4",
+    "critters": "^0.0.23",
+    "postcss": "^8.5.2",
+    "postcss-import": "^17.0.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  },
+  "browserslist": [
+    "defaults",
+    "last 2 Chrome versions",
+    "last 2 Safari versions",
+    "last 2 iOS versions",
+    "last 2 Firefox versions",
+    "last 2 Edge versions",
+    "not IE 11",
+    "not dead"
+  ]
+}

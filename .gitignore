@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+
+# Go
+bin/
+anivorm-api
+anivorm-server
+backend/server
+*.exe
+*.test
+*.prof
+
+# Storage, cache and uploads
+storage/
+tmp/
+*.log
+.DS_Store
+
+# Environment & Sensitive configs
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pub
+*.bak
+
+# Local ecosystem overrides
+ecosystem.config.local.js

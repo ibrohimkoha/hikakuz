@@ -1,0 +1,551 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: var(--font-plus-jakarta), 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-heading: var(--font-outfit), 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    position: relative;
+    width: 100%;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #060911;
+    background-image: 
+      radial-gradient(circle at 15% 10%, rgba(225, 29, 72, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 85% 20%, rgba(6, 182, 212, 0.10) 0%, transparent 45%),
+      radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.12) 0%, transparent 55%);
+    background-attachment: fixed;
+    color: #f1f5f9;
+    min-height: 100dvh;
+    touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Hide number input spinners globally */
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(13, 17, 28, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-dropdown {
+  background: rgba(10, 13, 22, 0.96);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(225, 29, 72, 0.25);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.85);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(20, 24, 40, 0.65) 0%, rgba(10, 13, 22, 0.85) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Swiper Autoplay Progress Countdown Styling */
+.autoplay-progress {
+  position: absolute;
+  z-index: 25;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #fff;
+  font-size: 10px;
+  background: rgba(10, 13, 22, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(225, 29, 72, 0.35);
+}
+
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 3px;
+  stroke: #e11d48;
+  fill: none;
+  stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+/* Swiper Custom Pagination */
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.4) !important;
+  opacity: 0.7 !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #e11d48 !important;
+  width: 24px !important;
+  border-radius: 9999px !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 12px rgba(225, 29, 72, 0.8) !important;
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Shimmer Skeleton Animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.skeleton-shimmer::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.16) 50%,
+    rgba(255, 255, 255, 0.08) 65%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  content: '';
+}
+
+/* ==========================================================================
+   Modern Video.js v10 Theme (Glassmorphism Floating Pill Dock)
+   ========================================================================== */
+.video-js.vjs-theme-anivorm {
+  width: 100% !important;
+  max-width: 100% !important;
+  font-family: inherit !important;
+  overflow: hidden !important;
+  border-radius: 16px !important;
+  background-color: #000000 !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-tech {
+  width: 100% !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  border-radius: 16px !important;
+}
+
+/* Centered Circular Big Play Button */
+.video-js.vjs-theme-anivorm .vjs-big-play-button {
+  width: 68px !important;
+  height: 68px !important;
+  line-height: 66px !important;
+  border-radius: 50% !important;
+  background: rgba(15, 17, 26, 0.75) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  font-size: 32px !important;
+  margin-top: -34px !important;
+  margin-left: -34px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+.video-js.vjs-theme-anivorm:hover .vjs-big-play-button {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-color: #ffffff !important;
+  transform: scale(1.08) !important;
+}
+
+/* Video.js 10 Frosted Glass Floating Dock Control Bar (Matching videojs.org default skin) */
+.video-js.vjs-theme-anivorm .vjs-control-bar {
+  display: flex !important;
+  align-items: center !important;
+  position: absolute !important;
+  bottom: 14px !important;
+  left: 14px !important;
+  right: 14px !important;
+  width: calc(100% - 28px) !important;
+  height: 48px !important;
+  background: rgba(18, 24, 34, 0.72) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  border-radius: 12px !important;
+  padding: 0 14px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 20 !important;
+}
+
+.video-js.vjs-theme-anivorm.vjs-fullscreen .vjs-control-bar {
+  bottom: 24px !important;
+  left: 24px !important;
+  right: 24px !important;
+  width: calc(100% - 48px) !important;
+  border-radius: 14px !important;
+  padding: 0 20px !important;
+}
+
+/* Auto-hide Control Bar when inactive and playing */
+.video-js.vjs-theme-anivorm.vjs-user-inactive.vjs-playing .vjs-control-bar {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(8px) !important;
+}
+
+/* Play/Pause & Fullscreen Button */
+.video-js.vjs-theme-anivorm .vjs-control {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-button > .vjs-icon-placeholder {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-button > .vjs-icon-placeholder:before {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  line-height: 1 !important;
+  font-size: 1.6em !important;
+  text-align: center !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-play-control,
+.video-js.vjs-theme-anivorm .vjs-fullscreen-control {
+  width: 38px !important;
+  height: 100% !important;
+  cursor: pointer !important;
+  color: #e2e8f0 !important;
+  transition: color 0.15s ease, transform 0.15s ease !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-play-control:hover,
+.video-js.vjs-theme-anivorm .vjs-fullscreen-control:hover {
+  color: #ffffff !important;
+  transform: scale(1.08) !important;
+}
+
+/* Hide native Video.js error dialog (we render clean React recovery) */
+.video-js.vjs-theme-anivorm .vjs-error-display {
+  display: none !important;
+}
+
+/* Volume Panel */
+.video-js.vjs-theme-anivorm .vjs-volume-panel {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  transition: width 0.2s ease !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-mute-control {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-volume-control {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-volume-panel.vjs-volume-panel-horizontal:hover,
+.video-js.vjs-theme-anivorm .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active {
+  width: 7em !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-volume-bar.vjs-slider-horizontal {
+  height: 4px !important;
+  border-radius: 2px !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  margin: 0 !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-volume-level {
+  background: #ffffff !important;
+  border-radius: 2px !important;
+}
+
+/* Current & Remaining Time Displays */
+.video-js.vjs-theme-anivorm .vjs-current-time,
+.video-js.vjs-theme-anivorm .vjs-remaining-time {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  font-variant-numeric: tabular-nums !important;
+  color: #cbd5e1 !important;
+  padding: 0 6px !important;
+  line-height: 1 !important;
+  min-width: auto !important;
+}
+
+/* Center Sleek Progress Bar - Takes up remaining width like v10 */
+.video-js.vjs-theme-anivorm .vjs-progress-control {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 12px !important;
+  min-width: 120px !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-progress-holder {
+  height: 4px !important;
+  border-radius: 9999px !important;
+  background-color: rgba(255, 255, 255, 0.18) !important;
+  margin: 0 !important;
+  transition: height 0.15s ease !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-progress-control:hover .vjs-progress-holder {
+  height: 6px !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-load-progress {
+  background: rgba(255, 255, 255, 0.35) !important;
+  border-radius: 9999px !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-play-progress {
+  background: #ffffff !important;
+  border-radius: 9999px !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-play-progress:before {
+  top: -3px !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
+  transition: transform 0.15s ease !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-progress-control:hover .vjs-play-progress:before {
+  transform: scale(1.2) !important;
+}
+
+/* Strictly Hide ALL extra Video.js buttons to guarantee 100% minimal v10 style */
+.video-js.vjs-theme-anivorm .vjs-live-control,
+.video-js.vjs-theme-anivorm .vjs-seek-to-live-control,
+.video-js.vjs-theme-anivorm .vjs-live-display,
+.video-js.vjs-theme-anivorm .vjs-chapters-button,
+.video-js.vjs-theme-anivorm .vjs-descriptions-button,
+.video-js.vjs-theme-anivorm .vjs-subs-caps-button,
+.video-js.vjs-theme-anivorm .vjs-audio-button,
+.video-js.vjs-theme-anivorm .vjs-custom-control-spacer {
+  display: none !important;
+}
+
+/* Settings Button (Gear Cog Icon) */
+.video-js.vjs-theme-anivorm .vjs-settings-button,
+.video-js.vjs-theme-anivorm .vjs-playback-rate {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 100% !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #cbd5e1 !important;
+  transition: color 0.15s ease, transform 0.25s ease !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-settings-button:hover,
+.video-js.vjs-theme-anivorm .vjs-playback-rate:hover {
+  color: #ffffff !important;
+  transform: rotate(45deg) scale(1.1) !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-settings-button .vjs-icon-placeholder,
+.video-js.vjs-theme-anivorm .vjs-playback-rate .vjs-playback-rate-value {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+  border: none !important;
+  background: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23e2e8f0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  opacity: 0.85 !important;
+  transition: opacity 0.15s ease !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-settings-button:hover .vjs-icon-placeholder,
+.video-js.vjs-theme-anivorm .vjs-playback-rate:hover .vjs-playback-rate-value {
+  opacity: 1 !important;
+}
+
+/* Speed Popup Menu */
+.video-js.vjs-theme-anivorm .vjs-menu-button-popup .vjs-menu .vjs-menu-content {
+  background: rgba(15, 17, 26, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px !important;
+  padding: 4px !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8) !important;
+  bottom: 35px !important;
+  width: 80px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-menu-item {
+  border-radius: 8px !important;
+  margin: 2px 0 !important;
+  padding: 6px 8px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #94a3b8 !important;
+  transition: all 0.15s ease !important;
+}
+
+.video-js.vjs-theme-anivorm .vjs-menu-item:hover,
+.video-js.vjs-theme-anivorm .vjs-menu-item.vjs-selected {
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 640px) {
+  .video-js.vjs-theme-anivorm .vjs-control-bar {
+    bottom: 8px !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: calc(100% - 16px) !important;
+    height: 42px !important;
+    border-radius: 10px !important;
+    padding: 0 8px !important;
+  }
+
+  .video-js.vjs-theme-anivorm .vjs-volume-panel {
+    display: none !important;
+  }
+
+  .video-js.vjs-theme-anivorm .vjs-current-time,
+  .video-js.vjs-theme-anivorm .vjs-remaining-time {
+    padding: 0 3px !important;
+    font-size: 11px !important;
+  }
+
+  .video-js.vjs-theme-anivorm .vjs-progress-control {
+    padding: 0 6px !important;
+    min-width: 50px !important;
+  }
+
+  .video-js.vjs-theme-anivorm .vjs-play-control,
+  .video-js.vjs-theme-anivorm .vjs-fullscreen-control,
+  .video-js.vjs-theme-anivorm .vjs-playback-rate {
+    width: 32px !important;
+  }
+}
+
+
